@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="autoWrapLineLayout">
+        <attr name="verticalGap" format="dimension" />
+        <attr name="horizontalGap" format="dimension" />
+        <attr name="fillMode" format="integer" />
+    </declare-styleable>
+</resources>

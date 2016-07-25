@@ -21,7 +21,48 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_main" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        xmlns:autoWrapLineLayout="http://schemas.android.com/apk/res-auto"
+        android:layout_marginTop="?attr/actionBarSize">
+
+        <cn.wolfspider.autowraplinelayout.AutoWrapLineLayout
+            android:id="@+id/auto_wrap_line_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            autoWrapLineLayout:verticalGap="1dp"
+            autoWrapLineLayout:horizontalGap="1dp"
+            autoWrapLineLayout:fillMode = "0">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="sssss"
+                android:background="@android:color/holo_red_light"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="sssss"
+                android:background="@android:color/holo_blue_light"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="sssss"
+                android:background="@android:color/holo_red_light"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ssssssssssssssssssssssssssssssssssssssss"
+                android:background="@android:color/holo_blue_light"/>
+
+        </cn.wolfspider.autowraplinelayout.AutoWrapLineLayout>
+
+    </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
