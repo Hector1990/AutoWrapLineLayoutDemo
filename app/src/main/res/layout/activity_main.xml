@@ -34,7 +34,7 @@
             android:layout_height="match_parent"
             autoWrapLineLayout:verticalGap="1dp"
             autoWrapLineLayout:horizontalGap="1dp"
-            autoWrapLineLayout:fillMode = "0">
+            autoWrapLineLayout:fillMode = "1">
 
             <TextView
                 android:layout_width="wrap_content"
