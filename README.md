@@ -6,7 +6,7 @@ One custom layout that can place views horizontally and auto wrap line.
 ![1](imgs/device-2016-07-26-162749.png)
 
 ### MODE_WRAP_CONTENT
-![2](imgs/device-2016-07-26-162850.png)
+![2](imgs/device-2016-07-26-162851.png)
 
 ## Usage
 ### Dependency
