@@ -46,7 +46,7 @@ In your layout file, add the AutoWrapLineLayout.
 ```
 
 ### Style
-The layout has two style: MODE_FILL_PARENT = 0 and MODE_WRAP_CONTENT = 1. The default value is 1. I gave samlpes in the top to describe the differences of the two modes.
+The layout has two style: MODE_FILL_PARENT = 0 and MODE_WRAP_CONTENT = 1. The default value is 0. I gave samlpes in the top to describe the differences of the two modes.
 
 You can set the style in xml or in java.
 ####xml
