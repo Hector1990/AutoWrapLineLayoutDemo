@@ -9,6 +9,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,7 +24,9 @@ import cn.wolfspider.autowraplinelayout.AutoWrapLineLayout;
 public class MainActivity extends AppCompatActivity {
 
     private AutoWrapLineLayout mAutoWrapLineLayout;
-    private int[] colors = {Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW, Color.MAGENTA};
+    private int[] colors = {android.R.color.holo_red_light, android.R.color.holo_blue_light,
+            android.R.color.holo_orange_light, android.R.color.holo_green_light,
+            android.R.color.holo_purple};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,8 +73,8 @@ public class MainActivity extends AppCompatActivity {
         TextView tv = new TextView(this);
         tv.setText(message);
         Random random = new Random();
-        tv.setBackgroundColor(colors[random.nextInt(colors.length)]);
-        tv.setPadding(10, 10, 10, 10);
+        tv.setBackgroundColor(getResources().getColor(colors[random.nextInt(colors.length)]));
+        tv.setPadding(DensityUtils.dpToPx(this, 16), 0, DensityUtils.dpToPx(this, 16), 0);
         mAutoWrapLineLayout.addView(tv);
     }
 }

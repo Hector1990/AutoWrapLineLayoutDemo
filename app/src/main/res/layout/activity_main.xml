@@ -34,31 +34,44 @@
             android:layout_height="match_parent"
             autoWrapLineLayout:verticalGap="1dp"
             autoWrapLineLayout:horizontalGap="1dp"
-            autoWrapLineLayout:fillMode = "1">
+            autoWrapLineLayout:fillMode = "0">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="sssss"
+                style="@style/TvStyle"
+                android:text="Sunday"
                 android:background="@android:color/holo_red_light"/>
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="sssss"
+                style="@style/TvStyle"
+                android:text="Monday"
                 android:background="@android:color/holo_blue_light"/>
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="sssss"
+                style="@style/TvStyle"
+                android:text="Tuesday"
+                android:background="@android:color/holo_green_light"/>
+
+            <TextView
+                style="@style/TvStyle"
+                android:text="Wednesday"
+                android:background="@android:color/holo_green_light"/>
+
+            <TextView
+                style="@style/TvStyle"
+                android:text="Thursday"
+                android:background="@android:color/holo_orange_light"/>
+
+            <TextView
+                style="@style/TvStyle"
+                android:text="Friday"
+                android:background="@android:color/holo_purple"/>
+
+            <TextView
+                style="@style/TvStyle"
+                android:text="Saturday"
                 android:background="@android:color/holo_red_light"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="ssssssssssssssssssssssssssssssssssssssss"
-                android:background="@android:color/holo_blue_light"/>
+
 
         </cn.wolfspider.autowraplinelayout.AutoWrapLineLayout>
 

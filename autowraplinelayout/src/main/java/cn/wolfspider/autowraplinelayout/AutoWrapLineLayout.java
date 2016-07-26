@@ -3,7 +3,6 @@ package cn.wolfspider.autowraplinelayout;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -26,18 +25,15 @@ public class AutoWrapLineLayout extends ViewGroup {
 
     private List<Integer> childOfLine; //Save the count of child views of each line;
     private List<Integer> mOriginWidth;
-    private List<Integer> mPreviousPadding;
-
-    private boolean isAdded = false;
 
     public AutoWrapLineLayout(Context context) {
         super(context);
+        mOriginWidth = new ArrayList<>();
     }
 
     public AutoWrapLineLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
         mOriginWidth = new ArrayList<>();
-        mPreviousPadding = new ArrayList<>();
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.autoWrapLineLayout);
         mHorizontalGap = ta.getDimensionPixelSize(R.styleable.autoWrapLineLayout_horizontalGap, 0);
         mVerticalGap = ta.getDimensionPixelSize(R.styleable.autoWrapLineLayout_verticalGap, 0);
@@ -47,11 +43,16 @@ public class AutoWrapLineLayout extends ViewGroup {
 
     public AutoWrapLineLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        mOriginWidth = new ArrayList<>();
+        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.autoWrapLineLayout);
+        mHorizontalGap = ta.getDimensionPixelSize(R.styleable.autoWrapLineLayout_horizontalGap, 0);
+        mVerticalGap = ta.getDimensionPixelSize(R.styleable.autoWrapLineLayout_verticalGap, 0);
+        mFillMode = ta.getInteger(R.styleable.autoWrapLineLayout_fillMode, 0);
+        ta.recycle();
     }
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
-        Log.d("childViewChanged", changed + "");
         if (mFillMode == MODE_FILL_PARENT) {
             layoutModeFillParent();
         }
@@ -72,15 +73,17 @@ public class AutoWrapLineLayout extends ViewGroup {
         int maxHeight = 0;
         for (int i = 0; i < childCount; i++) {
             View childItem = getChildAt(i);
-//            if (mOriginWidth.size() <= i) {
-//                measureChild(childItem, widthMeasureSpec, heightMeasureSpec);
-//                mOriginWidth.add(childItem.getMeasuredWidth());
-//            }
-//            else {
-//                childItem.measure(MeasureSpec.makeMeasureSpec(mOriginWidth.get(i), MeasureSpec.EXACTLY),
-//                        MeasureSpec.makeMeasureSpec(childItem.getMeasuredHeight(), MeasureSpec.EXACTLY));
-//            }
-            if (mFillMode == MODE_WRAP_CONTENT) {
+            if (mFillMode == MODE_FILL_PARENT) {
+                if (mOriginWidth.size() <= i) {
+                    measureChild(childItem, widthMeasureSpec, heightMeasureSpec);
+                    mOriginWidth.add(childItem.getMeasuredWidth());
+                }
+                else {
+                    childItem.measure(MeasureSpec.makeMeasureSpec(mOriginWidth.get(i), MeasureSpec.EXACTLY),
+                            MeasureSpec.makeMeasureSpec(childItem.getMeasuredHeight(), MeasureSpec.EXACTLY));
+                }
+            }
+            else {
                 measureChild(childItem, widthMeasureSpec, heightMeasureSpec);
             }
             int childHeight = childItem.getMeasuredHeight();
@@ -112,50 +115,26 @@ public class AutoWrapLineLayout extends ViewGroup {
     private void layoutModeFillParent() {
         int index = 0;
         int width = getMeasuredWidth();
-        int maxHeight = 0;
         int curHeight = 0;
         for (int i = 0; i < childOfLine.size(); i++) {
             int childCount = childOfLine.get(i);
+            int maxHeight = 0;
             int lineWidth = 0;
             for (int j = 0 ; j < childCount; j++) {
                 lineWidth += getChildAt(j + index).getMeasuredWidth();
             }
             int padding = (width - lineWidth - mHorizontalGap * (childCount - 1)) / childCount / 2;
-            Log.d("childViewPaddingbefore", padding + "");
             lineWidth = 0;
             int target = index + childCount;
             for ( ; index < target; index++) {
                 View item = getChildAt(index);
                 maxHeight = Math.max(maxHeight, item.getMeasuredHeight());
-                int leftPadding, rightPadding;
-                if (mPreviousPadding.size() > i) {
-                    if (index == getChildCount() - 1 && isAdded) {
-                        leftPadding = padding;
-                        rightPadding = padding;
-                        isAdded = false;
-                    }
-                    else {
-                        leftPadding = padding - mPreviousPadding.get(i);
-                        rightPadding = padding - mPreviousPadding.get(i);
-                    }
-                }
-                else {
-                    leftPadding = padding;
-                    rightPadding = padding;
-                }
-                item.setPadding(leftPadding + item.getPaddingLeft(), item.getPaddingTop(),
-                        rightPadding + item.getPaddingRight(), item.getPaddingBottom());
-                Log.d("childViewPadding", item.getPaddingLeft() + "");
-                item.measure(MeasureSpec.makeMeasureSpec(item.getMeasuredWidth() + item.getPaddingLeft() + item.getPaddingRight(), MeasureSpec.EXACTLY),
+                item.setPadding(padding, item.getPaddingTop(),
+                        padding, item.getPaddingBottom());
+                item.measure(MeasureSpec.makeMeasureSpec(item.getMeasuredWidth() + padding * 2, MeasureSpec.EXACTLY),
                         MeasureSpec.makeMeasureSpec(item.getMeasuredHeight(), MeasureSpec.EXACTLY));
                 item.layout(lineWidth, curHeight, lineWidth + item.getMeasuredWidth(), curHeight + item.getMeasuredHeight());
                 lineWidth += item.getMeasuredWidth() + mHorizontalGap;
-            }
-            if (i >= mPreviousPadding.size()) {
-                mPreviousPadding.add(padding);
-            }
-            else {
-                mPreviousPadding.set(i, padding);
             }
             curHeight += maxHeight + mVerticalGap;
         }
@@ -163,10 +142,10 @@ public class AutoWrapLineLayout extends ViewGroup {
 
     private void layoutWrapContent() {
         int index = 0;
-        int maxHeight = 0;
         int curHeight = 0;
         for (int i = 0; i < childOfLine.size(); i++) {
             int childCount = childOfLine.get(i);
+            int maxHeight = 0;
             int lineWidth = 0;
             int target = index + childCount;
             for ( ; index < target; index++) {
@@ -195,4 +174,5 @@ public class AutoWrapLineLayout extends ViewGroup {
     public void setVerticalGap(int verticalGap) {
         this.mVerticalGap = verticalGap;
     }
+
 }
