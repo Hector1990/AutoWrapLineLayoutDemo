@@ -1,5 +1,29 @@
 apply plugin: 'com.android.library'
 
+ext {
+    bintrayRepo = 'maven'
+    bintrayName = 'auto-wrap-line-layout'
+
+    publishedGroupId = 'cn.wolfspider'
+    libraryName = 'AutoWrapLineLayout'
+    artifact = 'autowraplinelayout'
+
+    libraryDescription = 'An layout that can auto wrap line according to the view width'
+
+    siteUrl = 'https://github.com/Hector1990/AutoWrapLineLayoutDemo'
+    gitUrl = 'https://github.com/Hector1990/AutoWrapLineLayoutDemo.git'
+
+    libraryVersion = '1.0.1'
+
+    developerId = 'hector1990'
+    developerName = 'Hector1990'
+    developerEmail = 'hector1990.troy@gmail.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
+
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.2"
@@ -29,3 +53,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.4.0'
     testCompile 'junit:junit:4.12'
 }
+
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
