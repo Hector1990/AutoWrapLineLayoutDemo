@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         mAutoWrapLineLayout = (AutoWrapLineLayout) findViewById(R.id.auto_wrap_line_layout);
+        mAutoWrapLineLayout.setFillMode(AutoWrapLineLayout.MODE_WRAP_CONTENT);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
