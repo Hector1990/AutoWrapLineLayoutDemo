@@ -3,10 +3,10 @@ One custom layout that can place views horizontally and auto wrap line.
 
 ## Samples
 ### MODE_FILL_PARENT
-<img src="imgs/device-2016-07-26-162749.png"/>
+![1](imgs/device-2016-07-26-162749.png)
 
 ### MODE_WRAP_CONTENT
-<img src="imgs/device-2016-07-26-162850.png"/>
+![2](imgs/device-2016-07-26-162850.png)
 
 ## Usage
 ### Dependency
