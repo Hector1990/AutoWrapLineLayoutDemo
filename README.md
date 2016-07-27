@@ -10,20 +10,10 @@ One custom layout that can place views horizontally and auto wrap line.
 
 ## Usage
 ### Dependency
-In your project level build.gradle, add the below script.
-
-```grovy
-repositories {
-    maven {
-        url 'https://dl.bintray.com/hector1990/maven'
-    }
-}                       
-```
-
 
 Add the below dependency in your app level build.gradle. Make sure your project level build.gradle includes the jcenter() repository.
 
-```grovy
+```gradle
 compile 'cn.wolfspider:autowraplinelayout:1.0.1'
 ```
 
